@@ -1,0 +1,18 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.docs.category.Quick Start": {
+    "message": "Quick Start",
+    "description": "The label for category Quick Start in sidebar docs"
+  },
+  "sidebar.docs.category.Schema": {
+    "message": "Schema",
+    "description": "The label for category Schema in sidebar docs"
+  },
+  "sidebar.docs.category.Code Generation": {
+    "message": "Code Generation",
+    "description": "The label for category Code Generation in sidebar docs"
+  }
+}

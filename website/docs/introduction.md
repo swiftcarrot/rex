@@ -1,18 +1,11 @@
-# rex
+---
+sidebar_position: 1
+title: Introduction
+---
 
-rex is a data layer for relational model
+# Introduction
 
-## Language Support
-
-- [x] go
-- [ ] java
-- [ ] typescript
-
-## Adapter Support
-
-- [ ] sqlite
-- [x] postgresql
-- [ ] mysql
+rex is a data layer for relational models
 
 ```hcl
 client "db" {
@@ -37,13 +30,4 @@ client "db" {
     }
   }
 }
-```
-
-```sh
-REX_ENV=development rex db:create
-rex g client
-rex g migration init
-rex db:migrate
-rex db:rollback
-rex db:drop
 ```

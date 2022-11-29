@@ -1,0 +1,264 @@
+---
+title: Query Builder
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+Create query builder with `Query` method, query builder can be used to fetch, update, and delete records.
+
+## Building Queries
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+userQuery := client.QueryUser()
+userQuery := client.QueryUserContext(ctx)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+UserQuery userQuery = client.queryUser();
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+userQuery = client.queryUser();
+```
+
+  </TabItem>
+</Tabs>
+
+### Select
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+userQuery = userQuery.Select(db.ColumnUserID, db.ColumnUserEmail)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java"></TabItem>
+  <TabItem value="typescript" label="TypeScript"></TabItem>
+</Tabs>
+
+### Where
+
+Rex generates query conditions based on colum types.
+
+- `EQ` -
+- `In` -
+
+```go
+userQuery = userQuery.Where(db.ColumnUserID.In([]int{1, 2, 3}))
+```
+
+Multiple arguments in `Where` will convert into sql `AND`,
+
+```go
+userQuery = userQuery.Where(
+	db.ColumnUserName.EQ("test"),
+	db.ColumnUserEmail.EQ("test@example.com"),
+)
+```
+
+### Order
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+userQuery = userQuery.Order(db.ColumnUserCreatedAt.Desc(), db.ColumnUserID.Asc())
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+userQuery = userQuery.order(db.ColumnUserCreatedAt.Desc(), db.ColumnUserID.Asc());
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+userQuery = userQuery.order(
+  db.ColumnUserCreatedAt.Desc(),
+  db.ColumnUserID.Asc()
+);
+```
+
+  </TabItem>
+</Tabs>
+
+### Limit and Offset
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+userQuery = userQuery.Limit(10).Offset(5)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+userQuery = userQuery.limit(10).offset(5);
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+userQuery = userQuery.limit(10).offset(5);
+```
+
+  </TabItem>
+</Tabs>
+
+### Join
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default></TabItem>
+  <TabItem value="java" label="Java"></TabItem>
+  <TabItem value="typescript" label="TypeScript"></TabItem>
+</Tabs>
+
+### Group
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default></TabItem>
+  <TabItem value="java" label="Java"></TabItem>
+  <TabItem value="typescript" label="TypeScript"></TabItem>
+</Tabs>
+
+### Having
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default></TabItem>
+  <TabItem value="java" label="Java"></TabItem>
+  <TabItem value="typescript" label="TypeScript"></TabItem>
+</Tabs>
+
+## Query Methods
+
+A query builder supports several methods based on query purposes.
+
+### All
+
+Return all records from query
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+users, err := userQuery.All()
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+List<User> users = userQuery.all();
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+users = userQuery.all();
+```
+
+  </TabItem>
+</Tabs>
+
+### First
+
+Return the first record from query
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+users, err := userQuery.First()
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+User user = userQuery.first();
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+user = userQuery.first();
+```
+
+  </TabItem>
+</Tabs>
+
+### Exists
+
+Return whether the query contains any result
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+exists, err := userQuery.Exists()
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+exists := userQuery.exists();
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+exists := userQuery.exists();
+```
+
+  </TabItem>
+</Tabs>
+
+### Count
+
+Return with `COUNT` query
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+total, err := userQuery.Count()
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+int total := userQuery.count();
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+total = userQuery.count();
+```
+
+  </TabItem>
+</Tabs>
