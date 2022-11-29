@@ -1,0 +1,39 @@
+---
+title: Create Client
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+`db.NewClient` with automatically read config by `REX_ENV`, set to `"development"` if missing.
+
+```go
+client, err := db.NewClient()
+client, err := db.NewClientWithEnv("development")
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+Client client = new Client();
+Client client = new Client("development");
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+`db.NewClient` with automatically read config by `REX_ENV`, set to `"development"` if missing.
+
+```typescript
+const db = require("./db");
+
+client = db.newClient();
+client = db.newClientWithEnv("development");
+```
+
+  </TabItem>
+</Tabs>

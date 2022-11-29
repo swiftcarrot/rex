@@ -1,13 +1,42 @@
 ---
-title: Query Builder
+title: Query Data
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Create query builder with `Query` method, query builder can be used to fetch, update, and delete records.
+## Find
+
+Find by primary key
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+user, err := client.FindUser(1);
+user, err := client.FindUserContext(ctx, 1);
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+User user = client.findUser(1);
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+user = client.findUser(1);
+```
+
+  </TabItem>
+</Tabs>
 
 ## Building Queries
+
+Create query builder with `Query` method, query builder can be used to fetch, update, and delete records.
 
 <Tabs groupId="generator">
   <TabItem value="go" label="Go" default>
@@ -47,6 +76,28 @@ userQuery = userQuery.Select(db.ColumnUserID, db.ColumnUserEmail)
   <TabItem value="java" label="Java"></TabItem>
   <TabItem value="typescript" label="TypeScript"></TabItem>
 </Tabs>
+
+### Select Distinct
+
+For query with `SELECT DISTINCT`
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+userQuery = userQuery.SelectDistinct(db.ColumnUserID, db.ColumnUserEmail)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java"></TabItem>
+  <TabItem value="typescript" label="TypeScript"></TabItem>
+</Tabs>
+
+### Pluck
+
+```go
+emails, err := userQuery.Pluck(db.ColumnUserEmail).AllString()
+```
 
 ### Where
 
@@ -123,18 +174,41 @@ userQuery = userQuery.limit(10).offset(5);
   </TabItem>
 </Tabs>
 
-### Join
+### Joins
 
 <Tabs groupId="generator">
-  <TabItem value="go" label="Go" default></TabItem>
+  <TabItem value="go" label="Go" default>
+
+```go
+// Inner join
+userQuery.Joins(db.TablePosts)
+// SELECT users.* FROM users INNER JOIN posts ON posts.user_id = users.id
+
+userQuery.RawJoins("INNER JOIN posts ON posts.user_id = users.id")
+
+// Multiple joins
+userQuery.Joins(db.TablePosts, db.TableAccounts)
+
+
+// Nested joins? posts -> comments
+userQuery.Joins(db.TablePosts, db.TableComments)
+```
+
+  </TabItem>
   <TabItem value="java" label="Java"></TabItem>
   <TabItem value="typescript" label="TypeScript"></TabItem>
 </Tabs>
 
-### Group
+### Group and Aggregation
 
 <Tabs groupId="generator">
-  <TabItem value="go" label="Go" default></TabItem>
+  <TabItem value="go" label="Go" default>
+
+```go
+userQuery.Group(db.ColumnUserName)
+```
+
+  </TabItem>
   <TabItem value="java" label="Java"></TabItem>
   <TabItem value="typescript" label="TypeScript"></TabItem>
 </Tabs>
@@ -142,7 +216,44 @@ userQuery = userQuery.limit(10).offset(5);
 ### Having
 
 <Tabs groupId="generator">
-  <TabItem value="go" label="Go" default></TabItem>
+  <TabItem value="go" label="Go" default>
+
+```go
+userQuery.Having(db.ColumnUserName.EQ())
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java"></TabItem>
+  <TabItem value="typescript" label="TypeScript"></TabItem>
+</Tabs>
+
+### Query Associations
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+userQuery, err := userQuery.IncludePosts()
+userQuery := userQuery.IncludePosts(func (q *postQuery) {
+	return q.Limit(3) // first 3 posts for each user
+})
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java"></TabItem>
+  <TabItem value="typescript" label="TypeScript"></TabItem>
+</Tabs>
+
+### Raw Query
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+userQuery.Raw("select ...")
+```
+
+  </TabItem>
   <TabItem value="java" label="Java"></TabItem>
   <TabItem value="typescript" label="TypeScript"></TabItem>
 </Tabs>
@@ -262,3 +373,5 @@ total = userQuery.count();
 
   </TabItem>
 </Tabs>
+
+## Query Batching
