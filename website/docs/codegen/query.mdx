@@ -89,7 +89,13 @@ userQuery = userQuery.SelectDistinct(db.ColumnUserID, db.ColumnUserEmail)
 ```
 
   </TabItem>
-  <TabItem value="java" label="Java"></TabItem>
+  <TabItem value="java" label="Java">
+
+  ```java
+userQuery = userQuery.selectDistinct(db.ColumnUserID, db.ColumnUserEmail);
+```
+
+  </TabItem>
   <TabItem value="typescript" label="TypeScript"></TabItem>
 </Tabs>
 
@@ -333,7 +339,7 @@ exists, err := userQuery.Exists()
   <TabItem value="java" label="Java">
 
 ```java
-exists := userQuery.exists();
+boolean exists = userQuery.exists();
 ```
 
   </TabItem>
@@ -361,7 +367,7 @@ total, err := userQuery.Count()
   <TabItem value="java" label="Java">
 
 ```java
-int total := userQuery.count();
+int total = userQuery.count();
 ```
 
   </TabItem>
