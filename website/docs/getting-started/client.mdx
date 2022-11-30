@@ -1,0 +1,36 @@
+---
+title: Client Generation
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```hcl {2}
+client "db" {
+  generator = "rex-client-go"
+}
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```hcl {2}
+client "db" {
+  generator = "rex-client-java"
+}
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```hcl {2}
+client "db" {
+  generator = "rex-client-typescript"
+}
+```
+
+  </TabItem>
+</Tabs>

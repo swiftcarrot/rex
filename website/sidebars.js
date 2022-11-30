@@ -6,16 +6,14 @@ const sidebars = {
     "introduction",
     {
       type: "category",
-      label: "Quick Start",
+      label: "Getting Started",
       link: {
         type: "generated-index",
       },
       items: [
-        "quick-start/installation",
-        "quick-start/schema",
-        "quick-start/go",
-        "quick-start/java",
-        "quick-start/typescript",
+        "getting-started/installation",
+        "getting-started/schema",
+        "getting-started/client",
       ],
     },
     {
