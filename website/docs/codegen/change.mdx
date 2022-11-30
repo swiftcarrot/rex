@@ -30,7 +30,7 @@ user, err := client.CreateUserContext(ctx, newUser)
 ```java
 PostChange newPost1 = ChangePost().setTitle("post title #1");
 PostChange newPost2 = ChangePost().setTitle("post title #2");
-UserChange newUser := ChangeUser()
+UserChange newUser = ChangeUser()
 	.setName("test")
 	.setEmail("test@example.com")
 	.setPosts(newPost1, newPost2);
