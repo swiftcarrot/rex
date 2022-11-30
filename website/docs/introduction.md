@@ -7,6 +7,8 @@ title: Introduction
 
 rex is a data layer for relational models
 
+## Declarative Schema
+
 ```hcl
 client "db" {
   generator = "rex-client-go"

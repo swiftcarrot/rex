@@ -1,0 +1,20 @@
+name: website
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'website/**'
+defaults:
+  run:
+    working-directory: ./website
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run build
+      - run: curl -sf https://cli.caitouyun.com/install.sh | sh
+      - run: caitou deploy --git
+        env:
+          CAITOU_TOKEN: ${{ secrets.CAITOU_TOKEN }}
