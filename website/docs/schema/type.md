@@ -20,28 +20,33 @@ model "Order" {
 With `type`, rex supports schema defintion for JSON column
 
 ```hcl
-type OrderItem {
+type "OrderItem" {
     attribute "product" {
         type = string
+        null = false
     }
     attribute "qty" {
         type = integer
+        null = false
     }
 }
 
-type OrderInfo {
+type "OrderInfo" {
     attribute "customer" {
         type = string
+        null = false
     }
     attribute "items" {
-        type = OrderItem
-        arrary = true
+        type  = "OrderItem"
+        array = true
+        null  = false
     }
 }
 
 model "Order" {
     column "info" {
-        type = OrderInfo
+        type = "OrderInfo"
+        null = false
     }
 }
 ```
