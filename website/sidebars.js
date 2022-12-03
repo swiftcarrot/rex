@@ -26,6 +26,7 @@ const sidebars = {
         "schema/hcl",
         "schema/client",
         "schema/model",
+        "schema/type",
         "schema/association",
         "schema/validation",
       ],
