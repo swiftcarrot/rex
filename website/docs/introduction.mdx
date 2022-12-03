@@ -1,0 +1,71 @@
+---
+title: Introduction
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Introduction
+
+rex is a data layer for relational models
+
+## Declarative Schema
+
+```hcl
+client "db" {
+  // define generators for client
+  // support multiple generators
+  generator "rex-client-go" {}
+  generator "rex-client-java" {}
+
+  // define database connection
+  // support multiple environments through `REX_ENV`
+  adapter = "postgresql"
+  config "development" {
+    database = "blog_development"
+    user     = "postgres"
+    password = "postgres"
+  }
+  config "production" {
+    url = env("DATABASE_URL")
+  }
+
+  // define database schema with models
+  model "Post" {
+    column "title" {
+      type = string
+    }
+    column "content" {
+      type = text
+    }
+  }
+}
+```
+
+## Database Migration
+
+## Client Generation
+
+```sh
+rex g client db
+```
+
+## Client API
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+client := db.NewClient()
+post, err := client.CreatePost(client.ChangePost().setTitle("post title"))
+posts, err := client.QueryPost().All()
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+  </TabItem>
+</Tabs>
