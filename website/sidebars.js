@@ -34,7 +34,7 @@ const sidebars = {
     "migration",
     {
       type: "category",
-      label: "Code Generation",
+      label: "Client API",
       link: {
         type: "generated-index",
       },
