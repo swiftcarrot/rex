@@ -1,11 +1,10 @@
 ---
-title: Custom Type
+title: Custom JSON Type
+description: Rex supports extending JSON type with schema
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-
-## Custom JSON type
 
 Rex schema support custom type besides arbitrary `JSON`.
 

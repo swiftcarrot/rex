@@ -18,7 +18,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Schema Syntax",
+      label: "Schema Spec",
       link: {
         type: "generated-index",
       },

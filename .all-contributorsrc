@@ -1,5 +1,13 @@
 {
+  "projectName": "rex",
+  "projectOwner": "swiftcarrot",
+  "repoType": "github",
+  "repoHost": "https://github.com",
   "files": [
     "website/docs/contributors.md"
-  ]
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [],
+  "contributorsPerLine": 7
 }
