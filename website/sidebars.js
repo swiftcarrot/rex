@@ -42,6 +42,7 @@ const sidebars = {
         "client/create",
         "client/read",
         "client/write",
+        "client/database",
         "client/transaction",
         "client/locking",
         "client/error",

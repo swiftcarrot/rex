@@ -1,0 +1,32 @@
+---
+title: Database Statements
+description: Rex client supports basic database statements
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+rex go client supports `database/sql` methods, including
+
+- `Exec()`
+- `ExecContext(ctx)`
+- `Query()`
+- `QueryContext(ctx)`
+- `QueryRow()`
+- `QueryRowContext(ctx)`
+- `Prepare()`
+- `PrepareContext(ctx)`
+- `Tx(ctx)`
+
+```go
+client.Query("select * from users")
+client.Exec("delete from users")
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java"></TabItem>
+  <TabItem value="typescript" label="TypeScript"></TabItem>
+</Tabs>
