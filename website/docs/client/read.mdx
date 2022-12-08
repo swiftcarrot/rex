@@ -250,18 +250,30 @@ userQuery := userQuery.IncludePosts(func (q *postQuery) {
   <TabItem value="typescript" label="TypeScript"></TabItem>
 </Tabs>
 
-### Raw Query
+### Find by SQL
 
 <Tabs groupId="generator">
   <TabItem value="go" label="Go" default>
 
 ```go
-userQuery.Raw("select ...")
+users, err := client.QueryUser().FindBySQL("select * from users limit ?", 10)
 ```
 
   </TabItem>
-  <TabItem value="java" label="Java"></TabItem>
-  <TabItem value="typescript" label="TypeScript"></TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+List<User> users = client.queryUser().findBySQL("select * from users limit ?", 10)
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+users = client.queryUser().findBySQL("select * from users limit ?", 10);
+```
+
+  </TabItem>
 </Tabs>
 
 ## Query Methods
