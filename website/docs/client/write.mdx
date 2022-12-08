@@ -34,7 +34,7 @@ PostChange newPost2 = client.ChangePost().setTitle("post title #2");
 UserChange newUser = client.ChangeUser()
 	.setName("test")
 	.setEmail("test@example.com")
-	.setPosts(newPost1, newPost2);
+	.addPosts(newPost1, newPost2);
 
 user, err := client.CreateUser(newUser);
 ```
@@ -49,7 +49,7 @@ newUser = client
   .changeUser()
   .setName("Wang Zuo")
   .setEmail("wangzuo@swiftcarrot.com")
-  .setPosts(newPost1, newPost2);
+  .addPosts(newPost1, newPost2);
 
 user = client.CreateUser(newUser);
 ```

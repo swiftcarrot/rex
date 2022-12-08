@@ -6,37 +6,6 @@ description: Read data from database with rex client
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-## Find
-
-Find by primary key
-
-`NotFoundError`
-
-<Tabs groupId="generator">
-  <TabItem value="go" label="Go" default>
-
-```go
-user, err := client.FindUser(1);
-user, err := client.FindUserContext(ctx, 1);
-```
-
-  </TabItem>
-  <TabItem value="java" label="Java">
-
-```java
-User user = client.findUser(1);
-```
-
-  </TabItem>
-  <TabItem value="typescript" label="TypeScript">
-
-```typescript
-user = client.findUser(1);
-```
-
-  </TabItem>
-</Tabs>
-
 ## Query Builder
 
 Create powerful query builder with `Query` method
@@ -46,6 +15,11 @@ Create powerful query builder with `Query` method
 
 ```go
 userQuery := client.QueryUser()
+```
+
+for context support
+
+```go
 userQuery := client.QueryUserContext(ctx)
 ```
 
@@ -66,7 +40,89 @@ userQuery = client.queryUser();
   </TabItem>
 </Tabs>
 
-### Select
+## Find
+
+Find by primary key
+
+`NotFoundError`
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+user, err := client.QueryUser().Find(1);
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+User user = client.queryUser().find(1);
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+user = client.queryUser().find(1);
+```
+
+  </TabItem>
+</Tabs>
+
+### Find By
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+user, err := client.QueryUser().FindBy(client.UserID.EQ(1));
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+User user = client.queryUser().findBy(client.UserID.EQ(1));
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+user = client.queryUser().findBy(client.UserID.EQ(1));
+```
+
+  </TabItem>
+</Tabs>
+
+### Find by SQL
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+users, err := client.QueryUser().FindBySQL("select * from users limit ?", 10)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+List<User> users = client.queryUser().findBySQL("select * from users limit ?", 10)
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+users = client.queryUser().findBySQL("select * from users limit ?", 10);
+```
+
+  </TabItem>
+</Tabs>
+
+## Select
 
 <Tabs groupId="generator">
   <TabItem value="go" label="Go" default>
@@ -102,13 +158,13 @@ userQuery = userQuery.selectDistinct(client.userID, client.userEmail);
   <TabItem value="typescript" label="TypeScript"></TabItem>
 </Tabs>
 
-### Pluck
+## Pluck
 
 ```go
 emails, err := userQuery.Pluck(client.userEmail).AllString()
 ```
 
-### Where
+## Where
 
 Rex generates query conditions based on colum types.
 
@@ -128,7 +184,7 @@ userQuery = userQuery.Where(
 )
 ```
 
-### Order
+## Order
 
 <Tabs groupId="generator">
   <TabItem value="go" label="Go" default>
@@ -154,7 +210,7 @@ userQuery = userQuery.order(client.userCreatedAt.Desc(), client.UserID.Asc());
   </TabItem>
 </Tabs>
 
-### Limit and Offset
+## Limit and Offset
 
 <Tabs groupId="generator">
   <TabItem value="go" label="Go" default>
@@ -180,7 +236,7 @@ userQuery = userQuery.limit(10).offset(5);
   </TabItem>
 </Tabs>
 
-### Joins
+## Joins
 
 <Tabs groupId="generator">
   <TabItem value="go" label="Go" default>
@@ -205,7 +261,7 @@ userQuery.Joins(client.Post, client.Comment)
   <TabItem value="typescript" label="TypeScript"></TabItem>
 </Tabs>
 
-### Group and Aggregation
+## Group and Aggregation
 
 <Tabs groupId="generator">
   <TabItem value="go" label="Go" default>
@@ -219,7 +275,7 @@ userQuery.Group(client.UserName)
   <TabItem value="typescript" label="TypeScript"></TabItem>
 </Tabs>
 
-### Having
+## Having
 
 <Tabs groupId="generator">
   <TabItem value="go" label="Go" default>
@@ -233,7 +289,7 @@ userQuery.Having(client.UserName.EQ())
   <TabItem value="typescript" label="TypeScript"></TabItem>
 </Tabs>
 
-### Query Associations
+## Query Associations
 
 <Tabs groupId="generator">
   <TabItem value="go" label="Go" default>
@@ -248,32 +304,6 @@ userQuery := userQuery.IncludePosts(func (q *postQuery) {
   </TabItem>
   <TabItem value="java" label="Java"></TabItem>
   <TabItem value="typescript" label="TypeScript"></TabItem>
-</Tabs>
-
-### Find by SQL
-
-<Tabs groupId="generator">
-  <TabItem value="go" label="Go" default>
-
-```go
-users, err := client.QueryUser().FindBySQL("select * from users limit ?", 10)
-```
-
-  </TabItem>
-  <TabItem value="java" label="Java">
-
-```java
-List<User> users = client.queryUser().findBySQL("select * from users limit ?", 10)
-```
-
-  </TabItem>
-  <TabItem value="typescript" label="TypeScript">
-
-```typescript
-users = client.queryUser().findBySQL("select * from users limit ?", 10);
-```
-
-  </TabItem>
 </Tabs>
 
 ## Query Methods
