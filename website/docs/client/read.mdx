@@ -6,9 +6,9 @@ description: Read data from database with rex client
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-## Query Builder
+## Query Object
 
-Create powerful query builder with `Query` method
+To read data from database with rex, a query object need to be created first. Rex generates query object for each model in schema. For example, `client.QueryUser()` returns a query object for users table.
 
 <Tabs groupId="generator">
   <TabItem value="go" label="Go" default>
@@ -17,7 +17,7 @@ Create powerful query builder with `Query` method
 userQuery := client.QueryUser()
 ```
 
-for context support
+An alternative query method is provided to support context in go.
 
 ```go
 userQuery := client.QueryUserContext(ctx)
@@ -42,9 +42,7 @@ userQuery = client.queryUser();
 
 ## Find
 
-Find by primary key
-
-`NotFoundError`
+`Find` method is used to fetch single object from database by primary key, for example:
 
 <Tabs groupId="generator">
   <TabItem value="go" label="Go" default>
@@ -69,6 +67,8 @@ user = client.queryUser().find(1);
 
   </TabItem>
 </Tabs>
+
+A `NotFoundError` is returned if no row is found with the provided primary key.
 
 ### Find By
 

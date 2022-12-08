@@ -6,6 +6,61 @@ description: Write data to database with rex client
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+## Change Object
+
+Rex client generates type safe change object for each model. The change object is used to create and update database records.
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+userChange := client.ChangeUser().SetName("test")
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+UserChange userChange = client.changeUser().setName("test");
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+userChange = client.changeUser().setName("test");
+```
+
+  </TabItem>
+</Tabs>
+
+For nullable field, rex client generates extra set nullable methods
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+name := "test"
+userChange := client.ChangeUser().SetNillableName(&name)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+
+```
+
+  </TabItem>
+</Tabs>
+
 ## Create
 
 To insert or update new data, rex requires a change object.
@@ -101,6 +156,8 @@ INSERT INTO users(name) VALUES('user #1', 'user #2') ON CONFLICT DO NOTHING RETU
 ```
 
 ## Update
+
+Rex client supports update in ActiveRecord pattern with change object.
 
 <Tabs groupId="generator">
   <TabItem value="go" label="Go" default>
@@ -213,21 +270,22 @@ rowsAffected = userQuery.UpdateAll(userChange);
   <TabItem value="go" label="Go" default>
 
 ```go
-
+user, err := client.Upsert(client.ChangeUser().SetName("test"))
+user, err := client.UpsertContext(ctx, client.ChangeUser().SetName("test"))
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
 ```java
-
+User user := client.upsert(client.changeUser().setName("test"));
 ```
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
 
-```javascript
-
+```typescript
+user = client.upsert(client.changeUser().setName("test"));
 ```
 
   </TabItem>
