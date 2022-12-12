@@ -2,7 +2,13 @@
 
 rex is a data layer for relational model
 
-```hcl
+Project Status:
+
+## Documentation
+
+Please visit [https://rex.caitouyun.com](https://rex.caitouyun.com) for the latest documentation, tutorial, and more.
+
+<!-- ```hcl
 client "db" {
   generator = "rex-client-go"
   adapter   = "postgresql"
@@ -34,23 +40,16 @@ rex g migration init
 rex db:migrate
 rex db:rollback
 rex db:drop
-```
+``` -->
 
-## Language and Database Support
+## Contributing
 
-| generator             | adapter   | status |
-| --------------------- | --------- | ------ |
-| rex-client-go         | sqlite    |        |
-|                       | mysql     |        |
-|                       | postgresl |        |
-| rex-client-java       | sqlite    |        |
-|                       | mysql     |        |
-|                       | postgresl |        |
-| rex-client-typescript | sqlite    |        |
-|                       | mysql     |        |
-|                       | postgresl |        |
+[contribute page](https://rex.caitouyun.com/contribute)
 
-# License
+- Report an issue:
+- Documentation:
+
+## License
 
 Rex is [Apache 2.0 licensed](./LICENSE).
 

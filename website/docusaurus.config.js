@@ -34,14 +34,10 @@ const config = {
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl: "https://github.com/swiftcarrot/rex/tree/main/website/",
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl: "https://github.com/swiftcarrot/rex/tree/main/website/",
         },
         theme: {
@@ -57,7 +53,7 @@ const config = {
       navbar: {
         title: "Rex",
         logo: {
-          alt: "My Site Logo",
+          alt: "Rex",
           src: "img/logo.svg",
         },
         items: [
@@ -68,6 +64,7 @@ const config = {
             label: "Docs",
           },
           { to: "/blog", label: "Blog", position: "left" },
+          { to: "/contribute", label: "Contribute", position: "left" },
           {
             href: "https://github.com/swiftcarrot/rex",
             label: "GitHub",
