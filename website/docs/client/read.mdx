@@ -8,33 +8,33 @@ import TabItem from "@theme/TabItem";
 
 ## Query Object
 
-To read data from database with rex, a query object need to be created first. Rex generates query object for each model in schema. For example, `client.QueryUser()` returns a query object for users table.
+To read data from database with rex, a query object need to be created first. Rex generates query object for each model in schema. For example, `c.QueryUser()` returns a query object for users table.
 
 <Tabs groupId="generator">
   <TabItem value="go" label="Go" default>
 
 ```go
-userQuery := client.QueryUser()
+userQuery := c.QueryUser()
 ```
 
 An alternative query method is provided to support context in go.
 
 ```go
-userQuery := client.QueryUserContext(ctx)
+userQuery := c.QueryUserContext(ctx)
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
 ```java
-UserQuery userQuery = client.queryUser();
+UserQuery userQuery = c.queryUser();
 ```
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
 
 ```typescript
-userQuery = client.queryUser();
+userQuery = c.queryUser();
 ```
 
   </TabItem>
@@ -48,21 +48,21 @@ userQuery = client.queryUser();
   <TabItem value="go" label="Go" default>
 
 ```go
-user, err := client.QueryUser().Find(1);
+user, err := c.QueryUser().Find(1);
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
 ```java
-User user = client.queryUser().find(1);
+User user = c.queryUser().find(1);
 ```
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
 
 ```typescript
-user = client.queryUser().find(1);
+user = c.queryUser().find(1);
 ```
 
   </TabItem>
@@ -76,21 +76,21 @@ A `NotFoundError` is returned if no row is found with the provided primary key.
   <TabItem value="go" label="Go" default>
 
 ```go
-user, err := client.QueryUser().FindBy(client.UserID.EQ(1));
+user, err := c.QueryUser().FindBy(c.UserID.EQ(1));
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
 ```java
-User user = client.queryUser().findBy(client.UserID.EQ(1));
+User user = c.queryUser().findBy(c.UserID.EQ(1));
 ```
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
 
 ```typescript
-user = client.queryUser().findBy(client.UserID.EQ(1));
+user = c.queryUser().findBy(c.UserID.EQ(1));
 ```
 
   </TabItem>
@@ -102,21 +102,21 @@ user = client.queryUser().findBy(client.UserID.EQ(1));
   <TabItem value="go" label="Go" default>
 
 ```go
-users, err := client.QueryUser().FindBySQL("select * from users limit ?", 10)
+users, err := c.QueryUser().FindBySQL("select * from users limit ?", 10)
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
 ```java
-List<User> users = client.queryUser().findBySQL("select * from users limit ?", 10)
+List<User> users = c.queryUser().findBySQL("select * from users limit ?", 10)
 ```
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
 
 ```typescript
-users = client.queryUser().findBySQL("select * from users limit ?", 10);
+users = c.queryUser().findBySQL("select * from users limit ?", 10);
 ```
 
   </TabItem>
@@ -128,7 +128,7 @@ users = client.queryUser().findBySQL("select * from users limit ?", 10);
   <TabItem value="go" label="Go" default>
 
 ```go
-userQuery = userQuery.Select(client.UserID, client.UserEmail)
+userQuery = userQuery.Select(c.UserID, c.UserEmail)
 ```
 
   </TabItem>
@@ -144,14 +144,14 @@ For query with `SELECT DISTINCT`
   <TabItem value="go" label="Go" default>
 
 ```go
-userQuery = userQuery.SelectDistinct(client.UserID, client.UserEmail)
+userQuery = userQuery.SelectDistinct(c.UserID, c.UserEmail)
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
 ```java
-userQuery = userQuery.selectDistinct(client.userID, client.userEmail);
+userQuery = userQuery.selectDistinct(c.userID, c.userEmail);
 ```
 
   </TabItem>
@@ -161,7 +161,7 @@ userQuery = userQuery.selectDistinct(client.userID, client.userEmail);
 ## Pluck
 
 ```go
-emails, err := userQuery.Pluck(client.userEmail).AllString()
+emails, err := userQuery.Pluck(c.userEmail).AllString()
 ```
 
 ## Where
@@ -172,15 +172,15 @@ Rex generates query conditions based on colum types.
 - `In` -
 
 ```go
-userQuery = userQuery.Where(client.UserID.In([]int{1, 2, 3}))
+userQuery = userQuery.Where(c.UserID.In([]int{1, 2, 3}))
 ```
 
 Multiple arguments in `Where` will convert into sql `AND`,
 
 ```go
 userQuery = userQuery.Where(
-	client.UserName.EQ("test"),
-	client.UserEmail.EQ("test@example.com"),
+	c.UserName.EQ("test"),
+	c.UserEmail.EQ("test@example.com"),
 )
 ```
 
@@ -190,21 +190,21 @@ userQuery = userQuery.Where(
   <TabItem value="go" label="Go" default>
 
 ```go
-userQuery = userQuery.Order(client.UserCreatedAt.Desc(), client.UserID.Asc())
+userQuery = userQuery.Order(c.UserCreatedAt.Desc(), c.UserID.Asc())
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
 ```java
-userQuery = userQuery.order(client.userCreatedAt.Desc(), client.UserID.Asc());
+userQuery = userQuery.order(c.userCreatedAt.Desc(), c.UserID.Asc());
 ```
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
 
 ```typescript
-userQuery = userQuery.order(client.userCreatedAt.Desc(), client.UserID.Asc());
+userQuery = userQuery.order(c.userCreatedAt.Desc(), c.UserID.Asc());
 ```
 
   </TabItem>
@@ -243,17 +243,17 @@ userQuery = userQuery.limit(10).offset(5);
 
 ```go
 // Inner join
-userQuery.Joins(client.Post)
+userQuery.Joins(c.Post)
 // SELECT users.* FROM users INNER JOIN posts ON posts.user_id = users.id
 
 userQuery.RawJoins("INNER JOIN posts ON posts.user_id = users.id")
 
 // Multiple joins
-userQuery.Joins(client.Post, client.Account)
+userQuery.Joins(c.Post, c.Account)
 
 
 // Nested joins? posts -> comments
-userQuery.Joins(client.Post, client.Comment)
+userQuery.Joins(c.Post, c.Comment)
 ```
 
   </TabItem>
@@ -267,7 +267,7 @@ userQuery.Joins(client.Post, client.Comment)
   <TabItem value="go" label="Go" default>
 
 ```go
-userQuery.Group(client.UserName)
+userQuery.Group(c.UserName)
 ```
 
   </TabItem>
@@ -281,7 +281,7 @@ userQuery.Group(client.UserName)
   <TabItem value="go" label="Go" default>
 
 ```go
-userQuery.Having(client.UserName.EQ())
+userQuery.Having(c.UserName.EQ())
 ```
 
   </TabItem>

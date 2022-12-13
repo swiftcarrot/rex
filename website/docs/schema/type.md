@@ -1,5 +1,5 @@
 ---
-title: Custom JSON Type
+title: Custom JSON Type (DRAFT)
 description: Rex supports extending JSON type with schema
 ---
 
@@ -75,12 +75,14 @@ type Order struct {
   <TabItem value="java" label="Java">
 
 ```java
+
 ```
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
 
 ```typescript
+
 ```
 
   </TabItem>
@@ -107,12 +109,14 @@ orderChange := client.ChangeOrder().SetInfo(db.OrderInfo{
   <TabItem value="java" label="Java">
 
 ```java
+
 ```
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
 
 ```typescript
+
 ```
 
   </TabItem>

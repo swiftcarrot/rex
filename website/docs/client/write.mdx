@@ -14,21 +14,21 @@ Rex client generates type safe change object for each model. The change object i
   <TabItem value="go" label="Go" default>
 
 ```go
-userChange := client.ChangeUser().SetName("test")
+userChange := c.ChangeUser().SetName("test")
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
 ```java
-UserChange userChange = client.changeUser().setName("test");
+UserChange userChange = c.changeUser().setName("test");
 ```
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
 
 ```typescript
-userChange = client.changeUser().setName("test");
+userChange = c.changeUser().setName("test");
 ```
 
   </TabItem>
@@ -41,7 +41,7 @@ For nullable field, rex client generates extra set nullable methods
 
 ```go
 name := "test"
-userChange := client.ChangeUser().SetNillableName(&name)
+userChange := c.ChangeUser().SetNillableName(&name)
 ```
 
   </TabItem>
@@ -69,44 +69,44 @@ To insert or update new data, rex requires a change object.
   <TabItem value="go" label="Go" default>
 
 ```go
-newPost1 := client.ChangePost().SetTitle("post title #1")
-newPost2 := client.ChangePost().SetTitle("post title #2")
-newUser := client.ChangeUser().
+newPost1 := c.ChangePost().SetTitle("post title #1")
+newPost2 := c.ChangePost().SetTitle("post title #2")
+newUser := c.ChangeUser().
 	SetName("test").
 	SetEmail("test@example.com").
 	AddPosts(newPost1, newPost2)
 
-user, err := client.CreateUser(newUser)
-user, err := client.CreateUserContext(ctx, newUser)
+user, err := c.CreateUser(newUser)
+user, err := c.CreateUserContext(ctx, newUser)
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
 ```java
-PostChange newPost1 = client.ChangePost().setTitle("post title #1");
-PostChange newPost2 = client.ChangePost().setTitle("post title #2");
-UserChange newUser = client.ChangeUser()
+PostChange newPost1 = c.ChangePost().setTitle("post title #1");
+PostChange newPost2 = c.ChangePost().setTitle("post title #2");
+UserChange newUser = c.ChangeUser()
 	.setName("test")
 	.setEmail("test@example.com")
 	.addPosts(newPost1, newPost2);
 
-user, err := client.CreateUser(newUser);
+user, err := c.CreateUser(newUser);
 ```
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
 
 ```typescript
-newPost1 = client.changePost().setTitle("post title #1");
-newPost2 = client.changePost().setTitle("post title #2");
+newPost1 = c.changePost().setTitle("post title #1");
+newPost2 = c.changePost().setTitle("post title #2");
 newUser = client
   .changeUser()
   .setName("Wang Zuo")
   .setEmail("wangzuo@swiftcarrot.com")
   .addPosts(newPost1, newPost2);
 
-user = client.CreateUser(newUser);
+user = c.CreateUser(newUser);
 ```
 
   </TabItem>
@@ -120,9 +120,9 @@ user = client.CreateUser(newUser);
   <TabItem value="go" label="Go" default>
 
 ```go
-ids, err := client.InsertAllUser(
-	client.ChangeUser().SetName("user #1"),
-	client.ChangeUser().SetName("user #2"),
+ids, err := c.InsertAllUser(
+	c.ChangeUser().SetName("user #1"),
+	c.ChangeUser().SetName("user #2"),
 )
 ```
 
@@ -130,7 +130,7 @@ ids, err := client.InsertAllUser(
   <TabItem value="java" label="Java">
 
 ```java
-List<int> ids = client.insertAllUser(
+List<int> ids = c.insertAllUser(
 	db.ChangeUser().setName("user #1"),
 	db.ChangeUser().setName("user #2")
 );
@@ -140,7 +140,7 @@ List<int> ids = client.insertAllUser(
   <TabItem value="typescript" label="TypeScript">
 
 ```typescript
-ids = client.insertAllUser(
+ids = c.insertAllUser(
   db.ChangeUser().setName("user #1"),
   db.ChangeUser().setName("user #2")
 );
@@ -163,7 +163,7 @@ Rex client supports update in ActiveRecord pattern with change object.
   <TabItem value="go" label="Go" default>
 
 ```go
-user, err := client.FindUser(1)
+user, err := c.QueryUser().Find(1)
 userChange := db.ChangeUser().SetName("new name")
 
 err := user.Update(userChange)
@@ -174,17 +174,17 @@ err := user.UpdateContext(ctx, userChange)
   <TabItem value="java" label="Java">
 
 ```java
-User user = client.FindUser(1)
-UserChange userChange = ChangeUser().setName("new name")
+User user = c.queryUser().find(1);
+UserChange userChange = ChangeUser().setName("new name");
 
-user.Update(userChange)
+user.Update(userChange);
 ```
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
 
 ```typescript
-user = client.FindUser(1);
+user = c.queryUser().find(1);
 userChange = db.ChangeUser().setName("new name");
 
 user.Update(userChange);
@@ -235,7 +235,7 @@ Update multiple records is done with `UpdateAll` method from query builder.
   <TabItem value="go" label="Go" default>
 
 ```go
-userQuery := client.QueryUser().Limit(10)
+userQuery := c.QueryUser().Limit(10)
 userChange := db.ChangeUser().SetName("new name")
 
 rowsAffected, err := userQuery.UpdateAll(userChange)
@@ -245,7 +245,7 @@ rowsAffected, err := userQuery.UpdateAll(userChange)
   <TabItem value="java" label="Java">
 
 ```java
-userQuery = client.queryUser().limit(10);
+userQuery = c.queryUser().limit(10);
 userChange = ChangeUser().setName("new name");
 
 int rowsAffected = userQuery.UpdateAll(userChange);
@@ -255,7 +255,7 @@ int rowsAffected = userQuery.UpdateAll(userChange);
   <TabItem value="typescript" label="TypeScript">
 
 ```typescript
-userQuery = client.queryUser().limit(10);
+userQuery = c.queryUser().limit(10);
 userChange = db.ChangeUser().SetName("new name");
 
 rowsAffected = userQuery.UpdateAll(userChange);
@@ -270,22 +270,22 @@ rowsAffected = userQuery.UpdateAll(userChange);
   <TabItem value="go" label="Go" default>
 
 ```go
-user, err := client.Upsert(client.ChangeUser().SetName("test"))
-user, err := client.UpsertContext(ctx, client.ChangeUser().SetName("test"))
+user, err := c.Upsert(c.ChangeUser().SetName("test"))
+user, err := c.UpsertContext(ctx, c.ChangeUser().SetName("test"))
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
 ```java
-User user := client.upsert(client.changeUser().setName("test"));
+User user := c.upsert(c.changeUser().setName("test"));
 ```
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
 
 ```typescript
-user = client.upsert(client.changeUser().setName("test"));
+user = c.upsert(c.changeUser().setName("test"));
 ```
 
   </TabItem>
@@ -297,32 +297,32 @@ user = client.upsert(client.changeUser().setName("test"));
   <TabItem value="go" label="Go" default>
 
 ```go
-user, err := client.FindUser(1)
+user, err := c.QueryUser().Find(1)
 err := user.Delete()
 err := user.DeleteContext(ctx)
 
-err := client.DeleteUser(1)
-err := client.DeleteUserContext(ctx, 1)
+err := c.DeleteUser(1)
+err := c.DeleteUserContext(ctx, 1)
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
 ```java
-User user = client.findUser(1);
+User user = c.findUser(1);
 user.delete();
 
-client.deleteUser(1);
+c.deleteUser(1);
 ```
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
 
 ```typescript
-user = client.findUser(1);
+user = c.findUser(1);
 user.delete();
 
-client.deleteUser(1);
+c.deleteUser(1);
 ```
 
   </TabItem>
@@ -336,7 +336,7 @@ Delete multiple records is also done with `DeleteAll` method from query builder,
   <TabItem value="go" label="Go" default>
 
 ```go
-userQuery := client.QueryUser().Limit(10)
+userQuery := c.QueryUser().Limit(10)
 
 rowsAffected, err := userQuery.DeleteAll()
 ```
@@ -345,7 +345,7 @@ rowsAffected, err := userQuery.DeleteAll()
   <TabItem value="java" label="Java">
 
 ```java
-UserQuery userQuery = client.queryUser().limit(10);
+UserQuery userQuery = c.queryUser().limit(10);
 
 int rowsAffected = userQuery.deleteAll();
 ```
@@ -354,7 +354,7 @@ int rowsAffected = userQuery.deleteAll();
   <TabItem value="typescript" label="TypeScript">
 
 ```typescript
-userQuery = client.queryUser().limit(10);
+userQuery = c.queryUser().limit(10);
 
 rowsAffected = userQuery.deleteAll();
 ```

@@ -12,16 +12,16 @@ import TabItem from "@theme/TabItem";
 `db.NewClient` with automatically read config by `REX_ENV`, set to `"development"` if missing.
 
 ```go
-client, err := db.NewClient()
-client, err := db.NewClientWithEnv("development")
+c, err := db.NewClient()
+c, err := db.NewClientWithEnv("development")
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
 ```java
-Client client = new Client();
-Client client = new Client("development");
+Client c = new Client();
+Client c = new Client("development");
 ```
 
   </TabItem>
@@ -32,8 +32,8 @@ Client client = new Client("development");
 ```typescript
 const db = require("./db");
 
-client = db.newClient();
-client = db.newClientWithEnv("development");
+c = db.newClient();
+c = db.newClientWithEnv("development");
 ```
 
   </TabItem>
