@@ -38,3 +38,65 @@ c = db.newClientWithEnv("development");
 
   </TabItem>
 </Tabs>
+
+## Query
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+var res struct {
+  Count int `db:"count"`
+}
+err := c.QueryOne("select count(id) from users").Scan(&res)
+```
+
+```go
+var users []struct {
+  ID int `db:"id"`
+}
+err := c.Query("select id from users where id > ?", 1).Scan(&users)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+
+```
+
+  </TabItem>
+</Tabs>
+
+## Exec
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+affectedRows, err := c.Exec("delete from users where id != ?", 1)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+
+```
+
+  </TabItem>
+</Tabs>
