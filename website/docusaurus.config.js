@@ -7,7 +7,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Rex",
-  tagline: "A data layer for relational models",
+  tagline: "Schema-first and type-safe ORM",
   url: "https://rex.caitouyun.com",
   baseUrl: "/",
   onBrokenLinks: "throw",
