@@ -51,6 +51,6 @@ rex db:drop
 
 ## License
 
-Rex is [Apache 2.0 licensed](./LICENSE).
+Rex is [Apache 2.0 licensed](https://github.com/swiftcarrot/rex/blob/main/LICENSE).
 
 The rex documentation (e.g., `.md` files in the `/website` folder) is Creative Commons licensed.
