@@ -76,22 +76,21 @@ newUser := c.ChangeUser().
 	SetEmail("test@example.com").
 	AddPosts(newPost1, newPost2)
 
-user, err := c.CreateUser(newUser)
-user, err := c.CreateUserContext(ctx, newUser)
+user, err := c.QueryUser().Create(newUser)
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
 ```java
-PostChange newPost1 = c.ChangePost().setTitle("post title #1");
-PostChange newPost2 = c.ChangePost().setTitle("post title #2");
-UserChange newUser = c.ChangeUser()
+PostChange newPost1 = c.changePost().setTitle("post title #1");
+PostChange newPost2 = c.changePost().setTitle("post title #2");
+UserChange newUser = c.changeUser()
 	.setName("test")
 	.setEmail("test@example.com")
 	.addPosts(newPost1, newPost2);
 
-user, err := c.CreateUser(newUser);
+user, err := c.queryUser().create(newUser);
 ```
 
   </TabItem>
@@ -106,7 +105,7 @@ newUser = client
   .setEmail("wangzuo@swiftcarrot.com")
   .addPosts(newPost1, newPost2);
 
-user = c.CreateUser(newUser);
+user = c.queryUser().create(newUser);
 ```
 
   </TabItem>
@@ -293,16 +292,14 @@ user = c.upsert(c.changeUser().setName("test"));
 
 ## Delete
 
+Rex client supports two types of `delete`.
+
 <Tabs groupId="generator">
   <TabItem value="go" label="Go" default>
 
 ```go
 user, err := c.QueryUser().Find(1)
 err := user.Delete()
-err := user.DeleteContext(ctx)
-
-err := c.DeleteUser(1)
-err := c.DeleteUserContext(ctx, 1)
 ```
 
   </TabItem>
@@ -311,8 +308,6 @@ err := c.DeleteUserContext(ctx, 1)
 ```java
 User user = c.findUser(1);
 user.delete();
-
-c.deleteUser(1);
 ```
 
   </TabItem>
@@ -321,8 +316,34 @@ c.deleteUser(1);
 ```typescript
 user = c.findUser(1);
 user.delete();
+```
 
-c.deleteUser(1);
+  </TabItem>
+</Tabs>
+
+Delete by id from a query object.
+
+<Tabs groupId="generator">
+  <TabItem value="go" label="Go" default>
+
+```go
+err := c.QueryUser().Delete(1)
+```
+
+This also supports delete statement with context by `c.QueryUserConext(ctx)`.
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+c.queryUser().delete(1);
+```
+
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
+
+```typescript
+c.queryUser().delete(1);
 ```
 
   </TabItem>
