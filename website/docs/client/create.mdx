@@ -44,6 +44,8 @@ c = db.newClientWithEnv("development");
 <Tabs groupId="generator">
   <TabItem value="go" label="Go" default>
 
+The query methods support mapping columns into struct fileds via the `db` struct tag.
+
 ```go
 var res struct {
   Count int `db:"count"`
@@ -53,9 +55,10 @@ err := c.QueryOne("select count(id) from users").Scan(&res)
 
 ```go
 var users []struct {
-  ID int `db:"id"`
+  ID   int    `db:"id"`
+  Name string `db:"name"`
 }
-err := c.Query("select id from users where id > ?", 1).Scan(&users)
+err := c.Query("select id, name from users where id > ?", 1).Scan(&users)
 ```
 
   </TabItem>
@@ -67,10 +70,6 @@ err := c.Query("select id from users where id > ?", 1).Scan(&users)
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
-
-```typescript
-
-```
 
   </TabItem>
 </Tabs>
