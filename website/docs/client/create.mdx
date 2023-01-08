@@ -58,7 +58,7 @@ var users []struct {
   ID   int    `db:"id"`
   Name string `db:"name"`
 }
-err := c.Query("select id, name from users where id > ?", 1).Scan(&users)
+err := c.Query("select id, name from users where id in (?)", []int{1, 2}).Scan(&users)
 ```
 
   </TabItem>
